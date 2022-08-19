@@ -1,6 +1,6 @@
 import { Button, Input, Stack } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-
+import { setMembers } from "../../firebase/index";
 const SignupViewWrapper = styled.div`
   .input__title {
     margin: 30px 0;
@@ -28,7 +28,9 @@ const Signup = () => {
         className="input__title"
         focusBorderColor="#FF360A"
       />
-      <Button>click</Button>
+      <Button onClick={setMembers("김동훈", "테스트", "서브포지션테스트")}>
+        click
+      </Button>
     </SignupViewWrapper>
   );
 };

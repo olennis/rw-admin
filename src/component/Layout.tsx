@@ -66,8 +66,8 @@ const Layout = ({ children }: Props) => {
           <aside className="nav__sidebar">
             <ul className="list__sidebar">
               <li>
-                <Link href="/signup" passHref>
-                  멤버추가
+                <Link href="/members" passHref>
+                  멤버
                 </Link>
               </li>
               <li>
