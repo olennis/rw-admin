@@ -6,6 +6,14 @@ import {
   addDoc,
 } from "firebase/firestore/lite";
 
+interface Member {
+  id: number;
+  name: string;
+  position: string;
+  attendance: boolean[];
+  subPosition: string;
+}
+
 const firebaseConfig = {
   apiKey: process.env.apiKey,
   authDomain: `${process.env.projectId}.firebaseapp.com`,
@@ -20,16 +28,19 @@ const membersCol = collection(db, "members");
 
 const getMembers = async () => {
   const memberSnapshot = await getDocs(membersCol);
-  const memberList = memberSnapshot.docs.map((doc) => doc.data());
+  const memberList = memberSnapshot.docs.map((doc) => doc.data()) as Member[];
   return memberList;
 };
+getMembers();
 
-const setMembers = async (
+const setMember = async (
+  id: number,
   name: string,
   position: string,
   subPosition: string
 ) => {
   const memberSnapshot = await addDoc(membersCol, {
+    id,
     name,
     position,
     subPosition,
@@ -37,4 +48,4 @@ const setMembers = async (
   return memberSnapshot;
 };
 
-export { getMembers, setMembers };
+export { getMembers, setMember };

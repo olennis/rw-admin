@@ -12,6 +12,7 @@ const LayoutWrapper = styled.div`
     left: 0;
     right: 0;
     top: 0;
+    z-index: 100;
     height: 70px;
     padding: 10px 50px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
@@ -22,8 +23,9 @@ const LayoutWrapper = styled.div`
   .wrapper__content {
     display: flex;
     margin-top: 70px;
+    position: relative;
+    z-index: 10;
     .nav__sidebar {
-      height: 100vh;
       padding: 50px;
       display: flex;
       flex-direction: column;
@@ -44,8 +46,6 @@ const LayoutWrapper = styled.div`
     }
     .section__content {
       padding: 50px;
-      max-width: 1920px;
-      margin: 0 auto;
     }
   }
 `;
