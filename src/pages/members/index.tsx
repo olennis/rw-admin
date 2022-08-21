@@ -36,7 +36,7 @@ const Members = () => {
   return (
     <MembersViewWrapper>
       <TableContainer>
-        <Table variant="simple">
+        <Table variant="striped" colorScheme="orange">
           <TableCaption placement="top">MEMBERS</TableCaption>
           <Thead>
             <Tr>

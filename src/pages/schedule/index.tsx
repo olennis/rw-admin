@@ -87,10 +87,11 @@ const Schedule = () => {
         ) {
           return <Td>{filteredSubPositionMembers[0].name}</Td>;
         } else {
-          console.log(filteredSubPositionMembers);
           return <Td>-</Td>;
         }
       }
+    } else {
+      return <Td>-</Td>;
     }
   };
 
@@ -117,7 +118,7 @@ const Schedule = () => {
   return (
     <ScheduleViewWrapper>
       <TableContainer className="table__schedule">
-        <Table variant="simple">
+        <Table variant="simple" colorScheme="orange">
           <TableCaption placement="top">
             {`${moment().month() + 1}월 `}가능한 스케쥴
           </TableCaption>
@@ -170,10 +171,12 @@ const Schedule = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <Button onClick={handleSchedule}>click!</Button>
+      <Button colorScheme="orange" onClick={handleSchedule}>
+        click!
+      </Button>
 
       <TableContainer className="table__schedule">
-        <Table variant="simple">
+        <Table variant="simple" colorScheme="orange">
           <TableCaption placement="top">
             {`${moment().month() + 1}월 `} 일정표
           </TableCaption>

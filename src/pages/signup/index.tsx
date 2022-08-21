@@ -37,7 +37,7 @@ const Signup = () => {
         <Input
           placeholder="name"
           className="input__title"
-          focusBorderColor="#FF360A"
+          colorScheme="orange"
           value={name}
           onChange={(e) => {
             setName(e.target.value);
@@ -47,7 +47,7 @@ const Signup = () => {
         <Input
           placeholder="position"
           className="input__title"
-          focusBorderColor="#FF360A"
+          colorScheme="orange"
           value={position}
           onChange={(e) => {
             setPosition(e.target.value);
@@ -57,13 +57,14 @@ const Signup = () => {
         <Input
           placeholder="sub-position"
           className="input__title"
-          focusBorderColor="#FF360A"
+          colorScheme="orange"
           value={subPosition}
           onChange={(e) => {
             setSubPosition(e.target.value);
           }}
         />
         <Button
+          colorScheme="orange"
           onClick={() => {
             setMember(id, name, position, subPosition)
               .then(() => {

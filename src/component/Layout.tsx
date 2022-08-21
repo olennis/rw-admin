@@ -8,7 +8,7 @@ interface Props {
 const LayoutWrapper = styled.div`
   width: 100%;
   .header__main {
-    position: fixed;
+    position: sticky;
     left: 0;
     right: 0;
     top: 0;
@@ -16,21 +16,20 @@ const LayoutWrapper = styled.div`
     height: 70px;
     padding: 10px 50px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+    background-color: #fff;
     .tit__header {
       font-size: 40px;
     }
   }
   .wrapper__content {
     display: flex;
-    margin-top: 70px;
     position: relative;
     z-index: 10;
     .nav__sidebar {
       padding: 50px;
       display: flex;
       flex-direction: column;
-      border-right: 1px solid #455573;
-      width: 200px;
+      min-width: 200px;
       .list__sidebar {
         li {
           &:first-child {
@@ -40,6 +39,9 @@ const LayoutWrapper = styled.div`
           a {
             color: #455573;
             text-decoration: none;
+            &:hover {
+              color: #000;
+            }
           }
         }
       }
@@ -67,22 +69,22 @@ const Layout = ({ children }: Props) => {
             <ul className="list__sidebar">
               <li>
                 <Link href="/members" passHref>
-                  멤버
+                  MEMBER
                 </Link>
               </li>
               <li>
                 <Link href="/schedule" passHref>
-                  일정체크
+                  SCHEDULE
                 </Link>
               </li>
               <li>
                 <Link href="/upload" passHref>
-                  악보 올리기
+                  UPLOAD
                 </Link>
               </li>
               <li>
                 <Link href="/search" passHref>
-                  악보 검색
+                  SEARCH
                 </Link>
               </li>
             </ul>
