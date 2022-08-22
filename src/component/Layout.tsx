@@ -1,6 +1,8 @@
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import Logo from "../assets/logo.png";
 interface Props {
   children: React.ReactNode;
 }
@@ -8,46 +10,52 @@ interface Props {
 const LayoutWrapper = styled.div`
   width: 100%;
   .header__main {
-    position: sticky;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 100;
-    height: 70px;
-    padding: 10px 50px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
-    background-color: #fff;
+    display: flex;
+    background-color: #f37321;
+    color: #fff;
     .tit__header {
-      font-size: 40px;
+      margin: 5px;
+      display: inline-block;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      color: #fff;
     }
   }
   .wrapper__content {
     display: flex;
     position: relative;
-    z-index: 10;
+    height: 100vh;
     .nav__sidebar {
-      padding: 50px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      background-color: #f37321;
+      padding: 30px;
       display: flex;
       flex-direction: column;
-      min-width: 200px;
+      min-width: 250px;
+      color: #fff;
       .list__sidebar {
+        margin-top: 100px;
         li {
           &:first-child {
             margin: 0;
           }
           margin: 20px 0;
           a {
-            color: #455573;
+            color: #fff;
             text-decoration: none;
             &:hover {
-              color: #000;
+              color: #fcc6a2;
             }
           }
         }
       }
     }
     .section__content {
-      padding: 50px;
+      margin-left: 300px;
+      padding: 35px;
     }
   }
 `;
@@ -61,15 +69,23 @@ const Layout = ({ children }: Props) => {
         <link rel="icon" href="../../public/favicon.ico" />
       </Head>
       <main>
-        <header className="header__main">
-          <h1 className="tit__header">RW</h1>
-        </header>
         <div className="wrapper__content">
           <aside className="nav__sidebar">
+            <header className="header__main">
+              <Image
+                src={Logo}
+                alt="logo"
+                className="img__logo"
+                width={40}
+                height={30}
+              />
+              <h1 className="tit__header">admin</h1>
+            </header>
+            <h2 className="hidden">Sidebar</h2>
             <ul className="list__sidebar">
               <li>
                 <Link href="/members" passHref>
-                  MEMBER
+                  MEMBERS
                 </Link>
               </li>
               <li>

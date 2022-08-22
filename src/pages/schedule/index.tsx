@@ -10,7 +10,6 @@ import {
   TableContainer,
   Button,
   Checkbox,
-  position,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { getMembers } from "../../firebase/index";
@@ -29,16 +28,27 @@ interface ScheduledPositions {
 
 const ScheduleViewWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  .btn__schedule {
-    color: #00b86a;
+  flex-direction: column;
+  width: 100%;
+  .wrapper__header--page {
+    display: flex;
+    .tit__page {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .btn__page {
+      margin-left: auto;
+    }
   }
-  .btn__schedule--absence {
-    color: #ff360a;
-  }
-  .table__schedule {
-    .txt__member--name {
-      display: block;
+  .wrapper__content--page {
+    display: flex;
+    .table__schedule + .table__schedule {
+      margin-left: 60px;
+    }
+    .table__schedule {
+      .txt__member--name {
+        display: block;
+      }
     }
   }
 `;
@@ -117,93 +127,102 @@ const Schedule = () => {
   }, []);
   return (
     <ScheduleViewWrapper>
-      <TableContainer className="table__schedule">
-        <Table variant="simple" colorScheme="orange">
-          <TableCaption placement="top">
-            {`${moment().month() + 1}월 `}가능한 스케쥴
-          </TableCaption>
-          <Thead>
-            <Tr>
-              <Th>NAME</Th>
-              <Th>POSITION</Th>
-              <Th>SUB-POSITION</Th>
-              <Th>1st</Th>
-              <Th>2nd</Th>
-              <Th>3rd</Th>
-              <Th>4th</Th>
-              {isEndOfMonthDate && <Th>5th</Th>}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {members?.map((member, idx) => {
-              return (
-                <Tr key={member.name}>
-                  <Td>{member.name}</Td>
-                  <Td>{member.position}</Td>
-                  <Td>
-                    {member.subPosition.length > 0 ? member.subPosition : "-"}
-                  </Td>
-                  {member.attendance.map((attendanceData, i) => {
-                    return (
-                      <Td key={`${member.name}_attendance_${i}`}>
-                        <Checkbox
-                          size="lg"
-                          colorScheme="orange"
-                          defaultChecked
-                          value={`${member.name}`}
-                          onChange={(e) => {
-                            if (member.attendance) {
-                              member.attendance[i] = e.target.checked;
-                            } else {
-                              member.attendance = [
-                                ...Array(isEndOfMonthDate ? 5 : 4),
-                              ].map((x) => true);
-                              member.attendance[i] = e.target.checked;
-                            }
-                          }}
-                        />
-                      </Td>
-                    );
-                  })}
-                </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      <Button colorScheme="orange" onClick={handleSchedule}>
-        click!
-      </Button>
-
-      <TableContainer className="table__schedule">
-        <Table variant="simple" colorScheme="orange">
-          <TableCaption placement="top">
-            {`${moment().month() + 1}월 `} 일정표
-          </TableCaption>
-          <Thead>
-            <Tr>
-              <Th>POSITION</Th>
-              <Th>1st</Th>
-              <Th>2nd</Th>
-              <Th>3rd</Th>
-              <Th>4th</Th>
-              {isEndOfMonthDate && <Th>5th</Th>}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {positions?.map((position, idx) => {
-              return (
-                <Tr key={`${position}${idx}`}>
-                  <Td>{position}</Td>
-                  {weeks.map((data, i) => {
-                    return makeWeekTd(position, i);
-                  })}
-                </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      <div className="wrapper__header--page">
+        <h3 className="tit__page">Schedule</h3>
+        <Button
+          colorScheme="orange"
+          onClick={handleSchedule}
+          size="sm"
+          className="btn__page">
+          go!
+        </Button>
+      </div>
+      <div className="wrapper__content--page">
+        <TableContainer className="table__schedule">
+          <Table variant="striped" colorScheme="orange">
+            <TableCaption placement="top">
+              {`${moment().month() + 1}월 `}가능한 스케쥴
+            </TableCaption>
+            <Thead>
+              <Tr>
+                <Th>NAME</Th>
+                <Th>POSITION</Th>
+                <Th>SUB-POSITION</Th>
+                <Th>1st</Th>
+                <Th>2nd</Th>
+                <Th>3rd</Th>
+                <Th>4th</Th>
+                {isEndOfMonthDate && <Th>5th</Th>}
+              </Tr>
+            </Thead>
+            <Tbody>
+              {members?.map((member, idx) => {
+                return (
+                  <Tr key={member.name}>
+                    <Td>{member.name}</Td>
+                    <Td>{member.position}</Td>
+                    <Td>
+                      {member.subPosition.length > 0 ? member.subPosition : "-"}
+                    </Td>
+                    {member.attendance.map((attendanceData, i) => {
+                      return (
+                        <Td key={`${member.name}_attendance_${i}`}>
+                          <Checkbox
+                            size="lg"
+                            color="#fff"
+                            colorScheme="orange"
+                            defaultChecked
+                            value={`${member.name}`}
+                            onChange={(e) => {
+                              if (member.attendance) {
+                                member.attendance[i] = e.target.checked;
+                              } else {
+                                member.attendance = [
+                                  ...Array(isEndOfMonthDate ? 5 : 4),
+                                ].map((x) => true);
+                                member.attendance[i] = e.target.checked;
+                              }
+                            }}
+                          />
+                        </Td>
+                      );
+                    })}
+                  </Tr>
+                );
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <TableContainer className="table__schedule">
+          <Table variant="simple" colorScheme="orange">
+            <TableCaption placement="top">
+              {`${moment().month() + 1}월 `} 일정표
+            </TableCaption>
+            <Thead>
+              <Tr>
+                <Th>POSITION</Th>
+                <Th>1st</Th>
+                <Th>2nd</Th>
+                <Th>3rd</Th>
+                <Th>4th</Th>
+                {isEndOfMonthDate && <Th>5th</Th>}
+              </Tr>
+            </Thead>
+            <Tbody>
+              {positions?.map((position, idx) => {
+                return (
+                  <Tr key={`${position}${idx}`}>
+                    <Td>{position}</Td>
+                    {weeks.map((data, i) => {
+                      return makeWeekTd(position, i);
+                    })}
+                  </Tr>
+                );
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </div>
     </ScheduleViewWrapper>
   );
 };

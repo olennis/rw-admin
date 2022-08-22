@@ -31,9 +31,14 @@ const SearchViewWrapper = styled.div`
   .input__title {
     margin: 30px 0;
     border: 1px solid orange;
+    display: block;
+    width: 835px;
   }
   .input__upload {
     height: 300px;
+  }
+  .btn__search {
+    margin-bottom: 30px;
   }
 `;
 
@@ -135,8 +140,9 @@ const Search = () => {
       <Input
         placeholder="title"
         className="input__title"
-        colorScheme="orange"
-        focusBorderColor="orange"
+        focusBorderColor="#f37321"
+        borderColor={"#f89b6c"}
+        _hover={{ borderColor: "#fcc6a2" }}
         autoFocus
         value={titleInput}
         onChange={(e) => {
@@ -144,11 +150,13 @@ const Search = () => {
         }}
       />
       <Button
+        size="sm"
         colorScheme="orange"
+        className="btn__search"
         onClick={() => {
           getSongbook(titleInput, codeInput);
         }}>
-        검색!
+        search
       </Button>
       <TableContainer>
         <Table variant="simple" colorScheme="orange">
