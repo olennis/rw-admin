@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { getSongBooks, setSongbook } from "../../firebase/index";
+import Image from "next/image";
 
 interface CodeBtn {
   code: string;
@@ -12,9 +13,17 @@ interface CodeBtn {
 const UploadViewWrapper = styled.div`
   .input__title {
     margin: 30px 0;
+    width: 756px;
   }
-  .input__upload {
-    height: 300px;
+  .input__url {
+    display: block;
+    width: 756px;
+  }
+  .btn__save {
+    margin: 30px 0;
+  }
+  .img__songbook {
+    max-height: 400px;
   }
 `;
 
@@ -82,9 +91,12 @@ const Upload = () => {
         })}
       </ButtonGroup>
       <Input
+        autoFocus
         placeholder="title"
         className="input__title"
-        colorScheme="orange"
+        focusBorderColor="#f37321"
+        borderColor={"#f89b6c"}
+        _hover={{ borderColor: "#fcc6a2" }}
         value={titleInput}
         onChange={(e) => {
           setTitleInput(e.target.value);
@@ -93,13 +105,17 @@ const Upload = () => {
       <Input
         placeholder="url"
         className="input__url"
-        colorScheme="orange"
+        focusBorderColor="#f37321"
+        borderColor={"#f89b6c"}
+        _hover={{ borderColor: "#fcc6a2" }}
         value={urlInput}
         onChange={(e) => {
           setUrlInput(e.target.value);
         }}
       />
+
       <Button
+        className="btn__save"
         colorScheme="orange"
         onClick={() => {
           setSongbook(id, titleInput, codeInput, urlInput)
@@ -119,8 +135,11 @@ const Upload = () => {
             });
           router.push("/search");
         }}>
-        저장
+        save
       </Button>
+      {urlInput.length > 0 && (
+        <img className="img__songbook" src={urlInput} alt="악보 이미지" />
+      )}
     </UploadViewWrapper>
   );
 };
