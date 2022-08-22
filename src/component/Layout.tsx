@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/Logo.png";
 interface Props {
   children: React.ReactNode;
 }
