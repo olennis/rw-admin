@@ -76,7 +76,7 @@ const Upload = () => {
 
   return (
     <UploadViewWrapper>
-      <ButtonGroup spacing={4}>
+      <ButtonGroup display={"flex"} spacing={4}>
         {codesBtn.map((code) => {
           return (
             <Button

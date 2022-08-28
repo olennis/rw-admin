@@ -123,7 +123,7 @@ const Search = () => {
 
   return (
     <SearchViewWrapper>
-      <ButtonGroup spacing={4}>
+      <ButtonGroup display={"flex"} spacing={4}>
         {codesBtn.map((code) => {
           return (
             <Button
@@ -137,6 +137,7 @@ const Search = () => {
           );
         })}
       </ButtonGroup>
+
       <Input
         placeholder="title"
         className="input__title"
