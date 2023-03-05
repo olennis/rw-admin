@@ -20,6 +20,12 @@ interface SongBook {
   code: string;
 }
 
+interface Attendance {
+  leader: string;
+  member: string[];
+  date: string;
+}
+
 const firebaseConfig = {
   apiKey: process.env.apiKey,
   authDomain: `${process.env.projectId}.firebaseapp.com`,
@@ -32,6 +38,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const membersCollection = collection(db, "members");
 const songbooksCollection = collection(db, "songbooks");
+const attendanceCollection = collection(db, "cellMember");
 
 const getMembers = async () => {
   const memberSnapshot = await getDocs(membersCollection);
@@ -77,4 +84,34 @@ const setSongbook = async (
   return songbookSnapshot;
 };
 
-export { getMembers, getSongBooks, setMember, setSongbook };
+const getMemberAttendance = async () => {
+  const cellMemberSnapshotTest = await getDocs(attendanceCollection);
+  const songbookList = cellMemberSnapshotTest.docs.map((doc) =>
+    doc.data()
+  ) as Attendance[];
+  return songbookList;
+};
+
+const setMemberAttendance = async (
+  leader: string,
+  member: string[],
+  demand: string,
+  date: string
+) => {
+  const attendanceSnapshot = await addDoc(attendanceCollection, {
+    leader,
+    member,
+    demand,
+    date,
+  });
+  return attendanceSnapshot;
+};
+
+export {
+  getMembers,
+  getSongBooks,
+  setMember,
+  setSongbook,
+  setMemberAttendance,
+  getMemberAttendance,
+};
