@@ -140,7 +140,7 @@ const NavToggleButton = styled.button`
 const Layout = ({ children }: Props) => {
   const [isRevivalMenuOpen, setIsRevivalMenuOpen] = useState<boolean>(false);
   const [isCellMenuOpen, setIsCellMenuOpen] = useState<boolean>(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
